@@ -1,24 +1,25 @@
-# This is a little guide to put an MC7010 into EDL mode on Linux/macOS (sorry guys, I hate Windows :-))
+# This is a little guide to put an MC7010 into EDL mode on Linux (sorry guys, I hate Windows :-))
 
-Before read the guide, you have to install on your machine [Bjoern Kerler's EDL tools](https://github.com/bkerler/edl) and sg3-utils.
+Before moving on, be sure that you have installed on your machine [Bjoern Kerler's EDL tools](https://github.com/bkerler/edl) and sg3-utils.
 
-All commands must be run as ROOT to avoid any permission issue.
+All commands must be run as ***root*** to avoid any permission issue.
 
-After you have all tools in your machine, connect the antenna with USB-C cable on your PC (still use PoE adapter to power it), then switch it from CDROM+RNDIS to 3 TTY MODE (Diag, Modem, NMEA) 
-using this command:
+Let's connect the antenna with USB-C cable on your PC (still use PoE adapter during all procedure to avoid boot issue), and switch it from *CDROM+RNDIS* to *3 TTY MODE (Diag, Modem, NMEA)* using this command:
 
 `sg_raw -n /dev/sg0 99 00 00 00 00 00`
 
-In this case I've used ***sg0*** because no other CDROM installed, just check your `dmesg` to see which sg is creaed when you attach the antenna to your PC
-This comand will switch the antenna to DIAG mode, you should have three ***ttyUSBx*** (check again your `dmesg`).
+In this example ***sg0*** was used because no other CDROM is installed, just check your `dmesg` to see which ***sgX*** is created when you attach the antenna to your PC. After executing it, antenna will switch to DIAG mode and create three ***ttyUSBx*** ports (check again your `dmesg`).
 
-Now let's switch the antenna to ***EDL mode***, this is needed to use edl tool. Use this comand to put in ***EDL/9008*** mode:
+Move on and switch the antenna to ***EDL mode***, this is needed to use **edl** tool. 
+Run this command:
 
 `qc_diag.py cmd 4b650100`
 
 Check with lsusb that you have this entry:
 
 `lsusb TBD`
+
+If everything went fine, now you are in ***EDL mode*** :-)
 
 # Let's play with edl tool
 

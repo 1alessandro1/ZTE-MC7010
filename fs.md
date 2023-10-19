@@ -65,12 +65,13 @@ Here are the partition layout and filesystem information about all 7010 units
 | mtd26: | 00100000 | 00040000   | "usb_qti"     |
 | mtd27: | 0a0c0000 | 00040000   | "system"      |
 
-Most importants partition that usally cannot be swapped in pair between firmware are: ***efs2, uefi, modem, boot and system***
+Most importants partition that usally needs to be swapped in pair between firmware are: ***efs2, uefi, modem, boot and system***
 
 - **efs2** contains all configuration (IMEI, BB settings and so on..) about baseband, so be careful to make a backup of it using Qualcomm Tool (QPST to backup as QCN file)
 - **uefi** contains rexOS system that is loaded by baseband, then it will read all firmware DSP from the modem partition (AKA NON-HLOS) to inizialiate all radio stuff
 - **modem** contains all DSP firmware loaded by UEFI
 - **boot** is the Linux Kernel used by AP processor to load embedded drivers and start all stuff from root fs
+- **zterw** is used by Root FS to store all settings that should be persistent across reboot, when you factory reset the antenna (using reset physical button or the one inside WebUI), the volumes inside this ***UBI*** will be formatted
 - **system** is the Linux Root FS where all binaries are stored and ran at boot after kernel startup
 
 **system** & **modem** partitions are created using ***UBIFS*** on top of an ***UBI*** layout. Both can be accessed (after enable SSH or TELNET on a stock unit) in read-write mode, so changes on the filesystem are possible
@@ -84,7 +85,7 @@ Most importants partition that usally cannot be swapped in pair between firmware
 
 These two volumes can be extracted using [ubireader](https://github.com/onekey-sec/ubi_reader), here is a little break down on how to extract and repack them:
 
-*Run all commands as *root* beacuse there are some special files (like /dev directory) that needs to be created*
+*Run all commands as **root** beacuse there are some special files (like /dev directory) that need to be created*
 
 - Install *ubireader* tool (see the link above on how to do it)
 - Copy file **sdxprairie-sysfs.ubi** into a directory and the run the command `ubireader_extract_files sdxprairie-sysfs.ubi`

@@ -1,4 +1,4 @@
-# This is a repository with all informations about Outdoor 5G CPE ZTE MC7010 family
+# This is a repository with all informations about ZTE MC7010 (Outdoor 5G CPE) family
 
 # HW revisions (currently known)
 There are 5 types of HW revision avaliable on the market, some may be also avaliable but never seen on my own :)
@@ -7,14 +7,14 @@ There are 5 types of HW revision avaliable on the market, some may be also avali
 - *MC7010 (***Plain Unit w/o mmWave***)* --> these units are sold on various market by Operator or directly by **ZTE**, common are ***Elisa, Telenor, DNA, Play, TIM Italy, 3 Austria***. Firmware can be exchanged between them. No way to flash **MC7010D**'s firmware on **MC7010** plain unit, otherewise you will get **"NO SERVICE"**
 - *MC7010 (***China Unit***)* --> these units are sold only on China market (but you can got one from AliExpress). No knowledge if the firmware can be replaced with others. His firmware doens't work on plain **MC7010** unit
 - *MC7010CA* --> these units are sold on Mexico or Canada market, common are from ***Telus, Roger and Telcel***. No mmWave support, no way to crossflash firmware
-- *MC7010D* --> these units are sold on various market just by Operator, common are ***Vodafone Italy, WIND Italy, Orange Poland, H3G UK, Yettel BG***. Firmware can be exchanged between them. No way to flash plain **MC7010**'s firmware on **MC7010D*** unit, otherewise you will get **"NO SERVICE"**
+- *MC7010D* --> these units are sold on various market just by Operator, common are ***Vodafone Italy, WIND Italy, Orange Poland, H3G UK, Yettel BG***. Firmware can be exchanged between them. No way to flash plain **MC7010**'s firmware on **MC7010D** unit, otherewise you will get **"NO SERVICE"**
 
 All other variants can be found on **ZTE ECCN** site at this [link](https://www.zte.com.cn/global/about/eccn.html)
 
-Useful stuff:
+Here is some useful stuff:
 
 - [Partition & Filesystem Info](fs.md)
 - [LTE/NR5G CA Combos](cacombo.md)
 - [Play with EDL tools and partitions](edl.md)
 
-
+Any help is really appreciated, feel free to open a PR to fix\add informations :-)

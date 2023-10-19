@@ -15,6 +15,6 @@ Useful stuff:
 
 - [Partition & Filesystem Info](fs.md)
 - [LTE/NR5G CA Combos](cacombo.md)
-
+- [Play with EDL tools and partitions](edl.md)
 
 

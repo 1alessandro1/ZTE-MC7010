@@ -230,4 +230,10 @@ Reset unit (it will boot back to normal mode):
 edl reset --resetmode=reset --loader=/path/to/prog_firehose.mbn
 ```
 
+In case the unit is stuck in DIAG mode (3 TTY), use this command to get it out:
+```
+qc_diag.py cmd 4baa000000
+qc_diag.py cmd 290200
+```
+
 As discussed in the [Partition Layout & Filesystem Information](fs.md) page, it's preferred to erase just ***boot*** partition so you can use ***fastboot*** to erase\write partitions and avoid rewrite each time **SBL1+P-Layout**.

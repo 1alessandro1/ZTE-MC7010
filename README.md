@@ -13,8 +13,8 @@ All other variants can be found on **ZTE ECCN** site at this [link](https://www.
 
 Useful stuff:
 
-- Partition & Filesystem Info
-- LTE/NR5G CA Combos 
+- [Partition & Filesystem Info](fs.md)
+- [LTE/NR5G CA Combos] (cacombo.md)
 
 
 

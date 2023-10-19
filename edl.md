@@ -37,15 +37,17 @@ TBD
 
 ## Read/Erase/Write Partitions
 
-Each time you touch a partition with EDL, it's necessary to re-write SBL (secondary boot loader) and Partition-Layout that will re-calculate all CRCs, to do this here is the command (use SBL based on your QFIL package):
+Each time you touch a partition with EDL, it's necessary to re-write **SBL** *(secondary boot loader)* and partition layout that will re-calculate all CRCs, to do this here is the command (use **SBL+P-Layout** based on your QFIL package):
 
-Erase:
+**IF YOU ERASE SBL1 AND PARTITON LAYOUT, YOUR UNIT WILL ALWAYS BOOT IN EDL MODE**
+
+Erase SBL1+Partition-Layout:
 ```
 edl es 0 639 --memory=NAND --sectorsize=4096 
 edl es 640 1279 --memory=NAND --sectorsize=4096 
 ```
 
-Write Back SBL1+Partition-Layout:
+Write back SBL1+Partition-Layout:
 ```
 edl ws 640 partition_complete_p4K_b256K.mbn --memory=NAND --sectorsize=4096 
 edl ws 0 sbl1.mbn --memory=NAND --sectorsize=4096 
@@ -64,7 +66,6 @@ Write single partition:
 `edl w system system.bin --memory=NAND`
 
 Make whole partitions backup (these files cannot be rewrite as is, needs to be refectored):
-
 ```
 mkdir dump_dir
 edl rl dump_dir --memory=NAND
@@ -74,4 +75,4 @@ Reset unit (it will boot back to normal mode):
 
 `edl reset --resetmode=reset`
 
-As discussed in the [Partition Layout & Filesystem Information](fs.md) page, it's preferred to erase just ***boot*** partition so you can use ***fastboot*** to erase\write partitions and avoid rewrite each time SBL1+P-Layout.
+As discussed in the [Partition Layout & Filesystem Information](fs.md) page, it's preferred to erase just ***boot*** partition so you can use ***fastboot*** to erase\write partitions and avoid rewrite each time **SBL1+P-Layout**.

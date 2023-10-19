@@ -37,7 +37,7 @@ TBD
 
 ## Read/Erase/Write Partitions
 
-Each time you touch a partition with EDL, it's necessary to re-write **SBL** *(secondary boot loader)* and partition layout that will re-calculate all CRCs, to do this here is the command (use **SBL+P-Layout** based on your QFIL package):
+Each time you touch a partition with EDL, it's necessary to re-write **SBL** *(secondary boot loader)* and partition layout that will re-calculate all CRCs, to do this here is the command (use **SBL1+P-Layout** based on your QFIL package):
 
 **IF YOU ERASE SBL1 AND PARTITON LAYOUT, YOUR UNIT WILL ALWAYS BOOT IN EDL MODE**
 

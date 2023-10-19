@@ -1,57 +1,84 @@
-# ZTE-MC7010
-This is a repository with all informations about Outdoor 5G CPE ZTE MC7010 family
+# This is a repository with all informations about Outdoor 5G CPE ZTE MC7010 family
 
-# Hardware revision currently known
-There are 5 types of HW revision avaliable on the market
+# HW revisions (currently known)
+There are 5 types of HW revision avaliable on the market, some may be also avaliable but never seen on my own :)
 
-- *MC7010 (w/mmWave)* --> these units are sold on various market like Italy (*from Fastweb/Linkem*). They support 5G mmWave and sub-6Ghz but LTE parts it's limited to TDD frequency. Missing HW on the board, so no way to use it with FDD
-- *MC7010 (Plain Unit)* --> these units are sold on various market by Operator or directly by ZTE, common are *Elisa, Telenor, DNA, Play, TIM Italy, 3 Austria*. Firmware can be exchanged between them. No way to flash MC7010D's firmware on MC7010 plain unit, otherewise you will get  **"NO SERVICE"**
-- *MC7010 (China Unit)* --> these units are sold only on China market (but you can got one from AliExpress). No knowledge if the firmware can be replaced with others. His firmware doens't work on plain MC7010 unit
-- *MC7010CA* --> these units are sold on Canada market, most of them are from Telus. No mmWave support, no way to crossflash firmware
-- *MC7010D* --> these units are sold on various market just by Operator, common are *Vodafone Italy, WIND Italy, Orange Poland, H3G UK, Yettel BG and so*. Firmware can be exchanged between them. No way to flash plain MC7010's firmware on MC7010D unit, otherewise you will get **"NO SERVICE"**
+- *MC7010 (***w/mmWave***)* --> these units are sold on various market like Italy (*from Fastweb/Linkem*). They support 5G mmWave and sub-6Ghz but LTE parts it's limited to TDD frequency. Missing HW on the board, so no way to use it with FDD
+- *MC7010 (***Plain Unit w/o mmWave***)* --> these units are sold on various market by Operator or directly by **ZTE**, common are ***Elisa, Telenor, DNA, Play, TIM Italy, 3 Austria***. Firmware can be exchanged between them. No way to flash **MC7010D**'s firmware on **MC7010** plain unit, otherewise you will get **"NO SERVICE"**
+- *MC7010 (***China Unit***)* --> these units are sold only on China market (but you can got one from AliExpress). No knowledge if the firmware can be replaced with others. His firmware doens't work on plain **MC7010** unit
+- *MC7010CA* --> these units are sold on Mexico or Canada market, common are from ***Telus, Roger and Telcel***. No mmWave support, no way to crossflash firmware
+- *MC7010D* --> these units are sold on various market just by Operator, common are ***Vodafone Italy, WIND Italy, Orange Poland, H3G UK, Yettel BG***. Firmware can be exchanged between them. No way to flash plain **MC7010**'s firmware on **MC7010D*** unit, otherewise you will get **"NO SERVICE"**
+
+All other variants can be found on **ZTE ECCN** site at this [link](https://www.zte.com.cn/global/about/eccn.html)
 
 # Partition Layout
-*MC7010-7010CA-7010 (mmWave)-7010 (China)*
 
+***MC7010-7010CA-7010(mmWave)-7010(China)***
 | Dev    | Size     | Erase Size | Name          |
 |--------|----------|------------|---------------|
-| mtd0:  | 00280000 | 00040000   | "sbl"         |
-| mtd1:  | 00280000 | 00040000   | "mibib"       |
-| mtd2:  | 00b00000 | 00040000   | "efs2"        |
-| mtd3:  | 00600000 | 00040000   | "efs2bak"     |
-| mtd4:  | 001c0000 | 00040000   | "tz"          |
-| mtd5:  | 00100000 | 00040000   | "tz_devcfg"   |
-| mtd6:  | 00180000 | 00040000   | "ddr"         |
-| mtd7:  | 00100000 | 00040000   | "apdp"        |
-| mtd8:  | 00100000 | 00040000   | "xbl_config"  |
-| mtd9:  | 00100000 | 00040000   | "multi_image" |
-| mtd10: | 00100000 | 00040000   | "aop"         |
-| mtd11: | 00100000 | 00040000   | "qhee"        |
-| mtd12: | 00100000 | 00040000   | "abl"         |
-| mtd13: | 00280000 | 00040000   | "uefi"        |
-| mtd14: | 00180000 | 00040000   | "toolsfv"     |
-| mtd15: | 00180000 | 00040000   | "loader_sti"  |
-| mtd16: | 00d00000 | 00040000   | "boot"        |
-| mtd17: | 00100000 | 00040000   | "scrub"       |
-| mtd18: | 06640000 | 00040000   | "modem"       |
-| mtd19: | 001c0000 | 00040000   | "misc"        |
-| mtd20: | 00180000 | 00040000   | "devinfo"     |
-| mtd21: | 00d00000 | 00040000   | "recovery"    |
-| mtd22: | 001c0000 | 00040000   | "fota"        |
-| mtd23: | 02b00000 | 00040000   | "recoveryfs"  |
-| mtd24: | 00100000 | 00040000   | "sec"         |
-| mtd25: | 08700000 | 00040000   | "zterw"       |
-| mtd26: | 0a100000 | 00040000   | "system"      |
+| mtd0   | 00280000 | 00040000   | "sbl"         |
+| mtd1   | 00280000 | 00040000   | "mibib"       |
+| mtd2   | 00b00000 | 00040000   | "efs2"        |
+| mtd3   | 00600000 | 00040000   | "efs2bak"     |
+| mtd4   | 001c0000 | 00040000   | "tz"          |
+| mtd5   | 00100000 | 00040000   | "tz_devcfg"   |
+| mtd6   | 00180000 | 00040000   | "ddr"         |
+| mtd7   | 00100000 | 00040000   | "apdp"        |
+| mtd8   | 00100000 | 00040000   | "xbl_config"  |
+| mtd9   | 00100000 | 00040000   | "multi_image" |
+| mtd10  | 00100000 | 00040000   | "aop"         |
+| mtd11  | 00100000 | 00040000   | "qhee"        |
+| mtd12  | 00100000 | 00040000   | "abl"         |
+| mtd13  | 00280000 | 00040000   | "uefi"        |
+| mtd14  | 00180000 | 00040000   | "toolsfv"     |
+| mtd15  | 00180000 | 00040000   | "loader_sti"  |
+| mtd16  | 00d00000 | 00040000   | "boot"        |
+| mtd17  | 00100000 | 00040000   | "scrub"       |
+| mtd18  | 06640000 | 00040000   | "modem"       |
+| mtd19  | 001c0000 | 00040000   | "misc"        |
+| mtd20  | 00180000 | 00040000   | "devinfo"     |
+| mtd21  | 00d00000 | 00040000   | "recovery"    |
+| mtd22  | 001c0000 | 00040000   | "fota"        |
+| mtd23  | 02b00000 | 00040000   | "recoveryfs"  |
+| mtd24  | 00100000 | 00040000   | "sec"         |
+| mtd25  | 08700000 | 00040000   | "zterw"       |
+| mtd26  | 0a100000 | 00040000   | "system"      |
 
-*MC7010D*
-
-| Dev    | Size     | Erase Size | Name          |
+***MC7010D***
+|   Dev  |   Size   | Erase Size |      Name     |
 |--------|----------|------------|---------------|
-TBF
+| mtd0   | 00280000 | 00040000   | "sbl"         |
+| mtd1   | 00280000 | 00040000   | "mibib"       |
+| mtd2   | 00b00000 | 00040000   | "efs2"        |
+| mtd3   | 00600000 | 00040000   | "efs2bak"     |
+| mtd4   | 001c0000 | 00040000   | "tz"          |
+| mtd5   | 00100000 | 00040000   | "tz_devcfg"   |
+| mtd6   | 00180000 | 00040000   | "ddr"         |
+| mtd7   | 00100000 | 00040000   | "apdp"        |
+| mtd8   | 00100000 | 00040000   | "multi_image" |
+| mtd9   | 00100000 | 00040000   | "aop"         |
+| mtd10  | 00100000 | 00040000   | "qhee"        |
+| mtd11  | 00100000 | 00040000   | "abl"         |
+| mtd12  | 00280000 | 00040000   | "uefi"        |
+| mtd13  | 00180000 | 00040000   | "toolsfv"     |
+| mtd14  | 00180000 | 00040000   | "loader_sti"  |
+| mtd15  | 00d00000 | 00040000   | "boot"        |
+| mtd16  | 00100000 | 00040000   | "scrub"       |
+| mtd17  | 06640000 | 00040000   | "modem"       |
+| mtd18  | 001c0000 | 00040000   | "misc"        |
+| mtd19  | 00180000 | 00040000   | "devinfo"     |
+| mtd20  | 00d00000 | 00040000   | "recovery"    |
+| mtd21  | 001c0000 | 00040000   | "fota"        |
+| mtd22  | 02b00000 | 00040000   | "recoveryfs"  |
+| mtd23: | 00100000 | 00040000   | "sec"         |
+| mtd24: | 08680000 | 00040000   | "zterw"       |
+| mtd25: | 000c0000 | 00040000   | "ipa_fw"      |
+| mtd26: | 00100000 | 00040000   | "usb_qti"     |
+| mtd27: | 0a0c0000 | 00040000   | "system"      |
 
 # LTE/NR5G CA Combo
 Here is a list of most common firmware's LTE/NR CA Combo:
-# LTE
+## LTE
 | Device   | Firmware           | LTE CAP                                                                               |
 |----------|--------------------|---------------------------------------------------------------------------------------|
 | MC7010   | Elisa B17          | https://uecapability.smartphonecombo.it/view/?id=3d81b4da-e65f-4e1c-8785-ba7d671851f1 |
@@ -63,7 +90,7 @@ Here is a list of most common firmware's LTE/NR CA Combo:
 | MC7010D  | H3G UK B09         | https://uecapability.smartphonecombo.it/view/?id=3f6fd35d-971a-4b79-be24-e8db5c0e5ebe |
 | MC7010CA | TELUS B01          | https://uecapability.smartphonecombo.it/view/?id=c17826c9-29da-4c81-9074-6fb078f122e9 |
 
-# NR5G
+## NR5G
 | Device   | Firmware           | LTE CAP                                                                               |
 |----------|--------------------|---------------------------------------------------------------------------------------|
 | MC7010   | Elisa B17          | https://uecapability.smartphonecombo.it/view/?id=0ea6852b-1e16-4a60-83f5-189e3ee9b4cc |

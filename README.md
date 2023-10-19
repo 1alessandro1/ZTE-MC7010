@@ -1,5 +1,5 @@
 # ZTE-MC7010
-This is a repository with all information about Outdoor 5G CPE ZTE MC7010 family
+This is a repository with all informations about Outdoor 5G CPE ZTE MC7010 family
 
 # Hardware revision currently known
 There are 5 types of HW revision avaliable on the market
@@ -62,6 +62,7 @@ Here is a list of most common firmware's LTE/NR CA Combo:
 | MC7010D  | WIND Italy B03     | https://uecapability.smartphonecombo.it/view/?id=0f9a07af-0a55-4a3a-81f2-4d0c65cfcb00 |
 | MC7010D  | H3G UK B09         | https://uecapability.smartphonecombo.it/view/?id=3f6fd35d-971a-4b79-be24-e8db5c0e5ebe |
 | MC7010CA | TELUS B01          | https://uecapability.smartphonecombo.it/view/?id=c17826c9-29da-4c81-9074-6fb078f122e9 |
+
 # NR5G
 | Device   | Firmware           | LTE CAP                                                                               |
 |----------|--------------------|---------------------------------------------------------------------------------------|

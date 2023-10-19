@@ -1,6 +1,6 @@
 # Partition Layout & Filesystem Information
 
-Here are the partition layout and filesystem information about all 7010 units
+Here is the partition layout together with filesystem information about all MC7010 units:
 
 ***MC7010-7010CA-7010(mmWave)-7010(China)***
 | Dev    | Size     | Erase Size | Name          |
@@ -65,33 +65,33 @@ Here are the partition layout and filesystem information about all 7010 units
 | mtd26: | 00100000 | 00040000   | "usb_qti"     |
 | mtd27: | 0a0c0000 | 00040000   | "system"      |
 
-Most importants partition that usally needs to be swapped in pair between firmware are: ***efs2, uefi, modem, boot and system***
+The most important partitions that usally need to be swapped between different firmwares are: ***efs2, uefi, modem, boot and system***:
 
-- **efs2** contains all configuration (IMEI, BB settings and so on..) about baseband, so be careful to make a backup of it using Qualcomm Tool (QPST to backup as QCN file)
-- **uefi** contains rexOS system that is loaded by baseband, then it will read all firmware DSP from the modem partition (AKA NON-HLOS) to inizialiate all radio stuff
-- **modem** contains all DSP firmware loaded by UEFI
-- **boot** is the Linux Kernel used by AP processor to load embedded drivers and start all stuff from root fs
-- **zterw** is used by Root FS to store all settings that should be persistent across reboot, when you factory reset the antenna (using reset physical button or the one inside WebUI), the volumes inside this ***UBI*** will be formatted
-- **system** is the Linux Root FS where all binaries are stored and ran at boot after kernel startup
+- **efs2** contains all baseband configuration (IMEI, BB settings and so on..). Be careful and make a backup of the whole partition using Qualcomm Tool (QPST to backup as QCN file);
+- **uefi** contains the rexOS system that is loaded by the baseband. It will read all DSP firmwares from the modem partition (AKA NON-HLOS) to initialize all radio stuff;
+- **modem** contains all DSP firmwares loaded by UEFI;
+- **boot** is the Linux Kernel used by the AP processor to load embedded drivers and start everything from Root FS;
+- **zterw** is used by Root FS to store all settings that should be persistent across reboots. When you factory reset the CPE, by using either the physical or WebUI button, the volumes inside this ***UBI*** will be formatted;
+- **system** is the Linux Root FS where all binaries are stored and ran at boot after kernel startup.
 
-**system** & **modem** partitions are created using ***UBIFS*** on top of an ***UBI*** layout. Both can be accessed (after enable SSH or TELNET on a stock unit) in read-write mode, so changes on the filesystem are possible
+**system** & **modem** partitions are created using ***UBIFS*** on top of an ***UBI*** layout. Both can be accessed in read-write mode after having enabled SSH or TELNET on a stock unit, so changes on the filesystem are possible.
 
 **system** contains 2 volumes:
 
 | Volume Name | Description                                                                                              |
 |-------------|----------------------------------------------------------------------------------------------------------|
-| ***rootfs***      | Contains all Linux and ZTE executables, it can modified to add sshd\telnetd and other tools        |
-| ***zte_data***    | Contains EFS default configuration (if you reset the device), web server pages, default&custom parameters used by ZTE binaries (like admin password, ip, antenna mode and so on) |
+| ***rootfs***      | Contains all Linux and ZTE executables, it can modified to add sshd/telnetd and other tools        |
+| ***zte_data***    | Contains EFS default configuration used after the device has been reset; web server pages; default AND custom parameters used by ZTE binaries, like admin password, IP, CPE mode and so on |
 
 These two volumes can be extracted using [ubireader](https://github.com/onekey-sec/ubi_reader), here is a little break down on how to extract and repack them:
 
 *Run all commands as **root** beacuse there are some special files (like /dev directory) that need to be created*
 
-- Install *ubireader* tool (see the link above on how to do it)
-- Copy file **sdxprairie-sysfs.ubi** into a directory and the run the command `ubireader_extract_files sdxprairie-sysfs.ubi`
-- This will create two folders path ubifs-root/IMAGE_ID/rootfs|ztedata
-- Run again on **sdxprairie-sysfs.ubi** the command `ubireader_display_info sdxprairie-sysfs.ubi | grep Sequence` and take note of the big number after the string, should be used when we repack UBI. We will call from now *ID_GOT_FROM_UBI_DISPLAY_INFO*
-- Do all your modes inside the rootfs|ztedata folder (like changing password hash, add scripts, add tools and so on)
+- Install the *ubireader* tool (see the link above for a how-to guide)
+- Copy the **sdxprairie-sysfs.ubi** file into a directory, then run `ubireader_extract_files sdxprairie-sysfs.ubi`
+- This will create two folders, with path `ubifs-root/IMAGE_ID/rootfs|ztedata`
+- Run `ubireader_display_info sdxprairie-sysfs.ubi | grep Sequence` again on **sdxprairie-sysfs.ubi** and take note of the big number after the string (called *ID_FROM_UBI_DISPLAY_INFO* from now on), this is to be used when UBI is repacked. 
+- All modifications are to be done inside the rootfs|ztedata folders (like changing password hash, adding scripts, adding tools and so on)
 - Re-create the two ***UBIFS*** with these commands:
     - **rootfs**: `/usr/sbin/mkfs.ubifs -m 4096 -e 253952 -c 2146 -x lzo -f 8 -k r5 -p 1 -l 4 -F -r rootfs rootfs_vol.ubifs`
     - **ztedata**: `/usr/sbin/mkfs.ubifs -m 4096 -e 253952 -c 68 -x lzo -f 8 -k r5 -p 1 -l 4 -F -r ztedata ztedata_vol.ubifs`
@@ -117,15 +117,15 @@ vol_name = ztedata
 vol_alignment = 1
 vol_size = 8888320
 ```
-- Finally re-create new **sdxprairie-sysfs.ubi** using the command `/usr/sbin/ubinize -p 262144 -m 4096 -O 4096 -s 4096 -x 1 -Q ID_GOT_FROM_UBI_DISPLAY_INFO -o mod_sdxprairie-sysfs.ubi ubi.ini`
-- This file now can be replaced on your QFIL package and flashed back on the unit
+- Finally create the new **sdxprairie-sysfs.ubi** using `/usr/sbin/ubinize -p 262144 -m 4096 -O 4096 -s 4096 -x 1 -Q ID_FROM_UBI_DISPLAY_INFO -o mod_sdxprairie-sysfs.ubi ubi.ini`
+- This file now can be replaced in your QFIL package and flashed on the unit
 
-If you want to play with ***rootfs\ztedata*** mods and avoid flash all the times with QFIL, is it possible to erase **boot** partiton, so the **abl** (Android Boot Loader) will automatically start in ***fastboot mode****, so you can boot your own kernel or flash other partition without need to put unit in ***EDL mode***, for instance to reflash system each time you can simply do:
+If you want to modify ***rootfs\ztedata*** without having to use QFIL to flash the firmware every time, erasing the **boot** partiton is possible, so the **abl** (Android Boot Loader) will automatically start in ***fastboot mode***, making it possible to boot your own kernel or to flash other partitions without needing to set the CPE in ***EDL mode***. For instance, to reflash the system each time, you can simply run these commands:
 
 ```
 fastboot erase system
 fastboot flash system  mod_sdxprairie-sysfs.ubi
 ```
 
-When finished, you can boot the kernel with the command: `fastboot boot sdxprairie-boot.img`
-If everything is fine, just reboot unit and permanent flash the kernel with the command `fastboot flash boot sdxprairie-boot.img`
+When finished, boot the kernel with the command: `fastboot boot sdxprairie-boot.img`.
+If everything is fine, just reboot the unit and permanently flash the kernel with the command: `fastboot flash boot sdxprairie-boot.img`.

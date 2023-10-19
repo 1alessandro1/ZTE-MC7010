@@ -1,10 +1,10 @@
 # This is a little guide to put an MC7010 into EDL mode on Linux (sorry guys, I hate Windows :-))
 
-Before moving on, be sure that you have installed on your machine [Bjoern Kerler's EDL tools](https://github.com/bkerler/edl) and sg3-utils.
+Before mstarting, be sure you have [Bjoern Kerler's EDL tools](https://github.com/bkerler/edl) and sg3-utils already installed on your machine.
 
-All commands must be run as ***root*** to avoid any permission issue.
+All commands must be run as ***root*** to avoid any issues with permissions.
 
-Let's connect the antenna with USB-C cable on your PC (still use PoE adapter during all procedure to avoid boot issue), you should see in `dmesg` an output like this:
+Connect the CPE to your PC using a USB-C cable, it's important to use the CPE's PoE adapter during all the procedure to avoid issues with boot. The following output (or similar) should be visible in `dmesg`:
 
 ```
 [3005700.308747] usb 1-1: new high-speed USB device number 94 using xhci_hcd
@@ -34,11 +34,11 @@ Let's connect the antenna with USB-C cable on your PC (still use PoE adapter dur
 [3005705.191239] sr 9:0:0:0: Attached scsi generic sg1 type 5
 ```
 
-Now we are going to switch it from *CDROM+RNDIS* to *3 TTY MODE (Diag, Modem, NMEA)* using this command:
+Now the CPE has to be switched from *CDROM+RNDIS* to *3 TTY MODE (Diag, Modem, NMEA)*. Doing so is accomplished using this command:
 
 `sg_raw -n /dev/sg1 99 00 00 00 00 00`
 
-In this example ***sg1*** was used because no other CDROM is installed, just check your `dmesg` to see which ***sgX*** is created when you attach the antenna to your PC. After executing it, antenna will switch to DIAG mode and create three ***ttyUSBx*** ports (check again your `dmesg`).
+In the provided example ***sg1*** was used because no other CDROM is installed, just check the `dmesg` to see which ***sgX*** is created when the CPE is connected to your PC. After executing it, the CPE will switch to DIAG mode and create three ***ttyUSBx*** ports: check the `dmesg` again to see how they are numbered.
 
 Here is an example of successful switch:
 
@@ -58,29 +58,29 @@ Here is an example of successful switch:
 [3005999.373560] usb 1-1: GSM modem (1-port) converter now attached to ttyUSB2
 ```
 
-Move on and switch the antenna to ***EDL mode***, this is needed to use **edl** tool. 
+Now the CPE can be switched to ***EDL mode***, this is needed to use the aforementioned **edl** tools by Bjoern Kerler. 
 Run this command:
 
 `qc_diag.py cmd 4b650100`
 
-Check with lsusb that you have this entry:
+Use `lsusb` to check the following entry is available:
 
 ```
 lsusb | grep 9008
 Bus 004 Device 032: ID 05c6:9008 Qualcomm, Inc. Gobi Wireless Modem (QDL mode)
 ```
 
-If everything went fine, now you are in ***EDL mode*** :-)
+If everything worked, the CPE is now in ***EDL mode*** :-)
 
-# Let's play with edl tool
+# Let's play with the edl tools
 
-With antenna in ***EDL mode*** we can now issue edl commands to see, dump, erase or write partitions
+With the CPE in ***EDL mode***, edl commands can be used to check, dump, erase or write partitions.
 
-Show current partitions layout:
+Run this command to show the current layout of the firmware's partitions:
 
 `edl printgpt --memory=NAND --loader=/path/to/prog_firehose.mbn`
 
-Output Example:
+Output example:
 
 ```
 Qualcomm Sahara / Firehose Client V3.61 (c) B.Kerler 2018-2023.
@@ -186,46 +186,47 @@ usb_qti         	15E40000	00100000	0xff/0x1/0x0	0
 system          	15F40000	0A0C0000	0xff/0x1/0x0	0
 ```
 
-## Read/Erase/Write Partitions
+## Reading, erasing and writing partitions
 
-Each time you touch a partition with EDL, it's necessary to re-write **SBL** *(secondary boot loader)* and partition layout that will re-calculate all CRCs, to do this here is the command (use **SBL1+P-Layout** based on your QFIL package):
+Each time a partition is modified using EDL, re-writing the **SBL** *(secondary boot loader)* and partition layout (used re-calculate all CRCs) is necessary. To do this, this command can be used (use **SBL1+P-Layout** based on your QFIL package):
 
-**IF YOU ERASE SBL1 AND PARTITON LAYOUT, YOUR UNIT WILL ALWAYS BOOT IN EDL MODE**
+**IF SBL1 AND PARTITONS LAYOUT ARE ERASED, YOUR UNIT WILL ALWAYS BOOT IN EDL MODE**
 
-Erase SBL1+Partition-Layout:
+Erase SBL1+Partition-Layout using this command:
 ```
 edl es 0 639 --memory=NAND --sectorsize=4096 --loader=/path/to/prog_firehose.mbn
 edl es 640 1279 --memory=NAND --sectorsize=4096 --loader=/path/to/prog_firehose.mbn
 ```
 
-Write back SBL1+Partition-Layout:
+Write back SBL1+Partition-Layout using this command:
 ```
 edl ws 640 partition_complete_p4K_b256K.mbn --memory=NAND --sectorsize=4096 --loader=/path/to/prog_firehose.mbn
 edl ws 0 sbl1.mbn --memory=NAND --sectorsize=4096 --loader=/path/to/prog_firehose.mbn
 ```
 
-Read single partition:
+Read a single partition using this command:
 ```
 edl r system test_system.bin --memory=NAND --loader=/path/to/prog_firehose.mbn
 ```
 
-Erase single partition:
+Erase a single partition using this command:
 ```
 edl e system --memory=NAND --loader=/path/to/prog_firehose.mbn
 ```
 
-Write single partition:
+Write a single partition using this command:
 ```
 edl w system system.bin --memory=NAND --loader=/path/to/prog_firehose.mbn
 ```
 
-Make whole partitions backup (these files cannot be rewrite as is, needs to be refectored):
+Make a backup of an entire partition using this command:
 ```
 mkdir dump_dir
 edl rl dump_dir --memory=NAND --loader=/path/to/prog_firehose.mbn
 ```
+These files cannot be rewritten as is, they need to be refectored.
 
-Reset unit (it will boot back to normal mode):
+Reset the unit, making it boot back to normal mode, using this command:
 ```
 edl reset --resetmode=reset --loader=/path/to/prog_firehose.mbn
 ```
@@ -236,4 +237,4 @@ qc_diag.py cmd 4baa000000
 qc_diag.py cmd 290200
 ```
 
-As discussed in the [Partition Layout & Filesystem Information](fs.md) page, it's preferred to erase just ***boot*** partition so you can use ***fastboot*** to erase\write partitions and avoid rewrite each time **SBL1+P-Layout**.
+As discussed in the [Partition Layout & Filesystem Information](fs.md) page, erasing just the ***boot*** partition, so ***fastboot*** can be used to erase and write partitions and also to avoid rewriting **SBL1+P-Layout** each time, is preferred.

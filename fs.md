@@ -73,7 +73,7 @@ Most importants partition that usally cannot be swapped in pair between firmware
 - **boot** is the Linux Kernel used by AP processor to load embedded drivers and start all stuff from root fs
 - **system** is the Linux Root FS where all binaries are stored and ran at boot after kernel startup
 
-**system** & **modem** partitions are created using ***UBIFS*** on top of an **UBI** layout. Both can be accessed (after enable SSH or TELNET on a stock unit) in read-write mode, so changes on the filesystem are possible
+**system** & **modem** partitions are created using ***UBIFS*** on top of an ***UBI*** layout. Both can be accessed (after enable SSH or TELNET on a stock unit) in read-write mode, so changes on the filesystem are possible
 
 **system** contains 2 volumes:
 
@@ -89,11 +89,11 @@ These two volumes can be extracted using [ubireader](https://github.com/onekey-s
 - Install *ubireader* tool (see the link above on how to do it)
 - Copy file **sdxprairie-sysfs.ubi** into a directory and the run the command `ubireader_extract_files sdxprairie-sysfs.ubi`
 - This will create two folders path ubifs-root/IMAGE_ID/rootfs|ztedata
-- Run again on **sdxprairie-sysfs.ubi** the command `ubireader_display_info ELISA_B17_sdxprairie-sysfs.ubi | grep Sequence` and take note of the big number after the string, should be used when we repack UBI. We will call from now *ID_GOT_FROM_UBI_DISPLAY_INFO*
+- Run again on **sdxprairie-sysfs.ubi** the command `ubireader_display_info sdxprairie-sysfs.ubi | grep Sequence` and take note of the big number after the string, should be used when we repack UBI. We will call from now *ID_GOT_FROM_UBI_DISPLAY_INFO*
 - Do all your modes inside the rootfs|ztedata folder (like changing password hash, add scripts, add tools and so on)
-- Re-create the two UBIFS with these commands:
-    - rootfs: `/usr/sbin/mkfs.ubifs -m 4096 -e 253952 -c 2146 -x lzo -f 8 -k r5 -p 1 -l 4 -F -r rootfs rootfs_vol.ubifs`
-    - ztedata: `/usr/sbin/mkfs.ubifs -m 4096 -e 253952 -c 68 -x lzo -f 8 -k r5 -p 1 -l 4 -F -r ztedata ztedata_vol.ubifs`
+- Re-create the two ***UBIFS*** with these commands:
+    - **rootfs**: `/usr/sbin/mkfs.ubifs -m 4096 -e 253952 -c 2146 -x lzo -f 8 -k r5 -p 1 -l 4 -F -r rootfs rootfs_vol.ubifs`
+    - **ztedata**: `/usr/sbin/mkfs.ubifs -m 4096 -e 253952 -c 68 -x lzo -f 8 -k r5 -p 1 -l 4 -F -r ztedata ztedata_vol.ubifs`
 - Now create a file called **ubi.ini** with this content:
   
 ```

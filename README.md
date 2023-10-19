@@ -11,94 +11,10 @@ There are 5 types of HW revision avaliable on the market, some may be also avali
 
 All other variants can be found on **ZTE ECCN** site at this [link](https://www.zte.com.cn/global/about/eccn.html)
 
-# Partition Layout
+Useful stuff:
 
-***MC7010-7010CA-7010(mmWave)-7010(China)***
-| Dev    | Size     | Erase Size | Name          |
-|--------|----------|------------|---------------|
-| mtd0   | 00280000 | 00040000   | "sbl"         |
-| mtd1   | 00280000 | 00040000   | "mibib"       |
-| mtd2   | 00b00000 | 00040000   | "efs2"        |
-| mtd3   | 00600000 | 00040000   | "efs2bak"     |
-| mtd4   | 001c0000 | 00040000   | "tz"          |
-| mtd5   | 00100000 | 00040000   | "tz_devcfg"   |
-| mtd6   | 00180000 | 00040000   | "ddr"         |
-| mtd7   | 00100000 | 00040000   | "apdp"        |
-| mtd8   | 00100000 | 00040000   | "xbl_config"  |
-| mtd9   | 00100000 | 00040000   | "multi_image" |
-| mtd10  | 00100000 | 00040000   | "aop"         |
-| mtd11  | 00100000 | 00040000   | "qhee"        |
-| mtd12  | 00100000 | 00040000   | "abl"         |
-| mtd13  | 00280000 | 00040000   | "uefi"        |
-| mtd14  | 00180000 | 00040000   | "toolsfv"     |
-| mtd15  | 00180000 | 00040000   | "loader_sti"  |
-| mtd16  | 00d00000 | 00040000   | "boot"        |
-| mtd17  | 00100000 | 00040000   | "scrub"       |
-| mtd18  | 06640000 | 00040000   | "modem"       |
-| mtd19  | 001c0000 | 00040000   | "misc"        |
-| mtd20  | 00180000 | 00040000   | "devinfo"     |
-| mtd21  | 00d00000 | 00040000   | "recovery"    |
-| mtd22  | 001c0000 | 00040000   | "fota"        |
-| mtd23  | 02b00000 | 00040000   | "recoveryfs"  |
-| mtd24  | 00100000 | 00040000   | "sec"         |
-| mtd25  | 08700000 | 00040000   | "zterw"       |
-| mtd26  | 0a100000 | 00040000   | "system"      |
+- Partition & Filesystem Info
+- LTE/NR5G CA Combos 
 
-***MC7010D***
-|   Dev  |   Size   | Erase Size |      Name     |
-|--------|----------|------------|---------------|
-| mtd0   | 00280000 | 00040000   | "sbl"         |
-| mtd1   | 00280000 | 00040000   | "mibib"       |
-| mtd2   | 00b00000 | 00040000   | "efs2"        |
-| mtd3   | 00600000 | 00040000   | "efs2bak"     |
-| mtd4   | 001c0000 | 00040000   | "tz"          |
-| mtd5   | 00100000 | 00040000   | "tz_devcfg"   |
-| mtd6   | 00180000 | 00040000   | "ddr"         |
-| mtd7   | 00100000 | 00040000   | "apdp"        |
-| mtd8   | 00100000 | 00040000   | "multi_image" |
-| mtd9   | 00100000 | 00040000   | "aop"         |
-| mtd10  | 00100000 | 00040000   | "qhee"        |
-| mtd11  | 00100000 | 00040000   | "abl"         |
-| mtd12  | 00280000 | 00040000   | "uefi"        |
-| mtd13  | 00180000 | 00040000   | "toolsfv"     |
-| mtd14  | 00180000 | 00040000   | "loader_sti"  |
-| mtd15  | 00d00000 | 00040000   | "boot"        |
-| mtd16  | 00100000 | 00040000   | "scrub"       |
-| mtd17  | 06640000 | 00040000   | "modem"       |
-| mtd18  | 001c0000 | 00040000   | "misc"        |
-| mtd19  | 00180000 | 00040000   | "devinfo"     |
-| mtd20  | 00d00000 | 00040000   | "recovery"    |
-| mtd21  | 001c0000 | 00040000   | "fota"        |
-| mtd22  | 02b00000 | 00040000   | "recoveryfs"  |
-| mtd23: | 00100000 | 00040000   | "sec"         |
-| mtd24: | 08680000 | 00040000   | "zterw"       |
-| mtd25: | 000c0000 | 00040000   | "ipa_fw"      |
-| mtd26: | 00100000 | 00040000   | "usb_qti"     |
-| mtd27: | 0a0c0000 | 00040000   | "system"      |
 
-# LTE/NR5G CA Combo
-Here is a list of most common firmware's LTE/NR CA Combo:
-## LTE
-| Device   | Firmware           | LTE CAP                                                                               |
-|----------|--------------------|---------------------------------------------------------------------------------------|
-| MC7010   | Elisa B17          | https://uecapability.smartphonecombo.it/view/?id=3d81b4da-e65f-4e1c-8785-ba7d671851f1 |
-| MC7010   | DNA B12            | https://uecapability.smartphonecombo.it/view/?id=3988f1ab-2aa9-4cb3-8345-549fc973f611 |
-| MC7010   | H3G Austria B07    | https://uecapability.smartphonecombo.it/view/?id=6921825c-dd86-4474-867b-6cd24f3c5072 |
-| MC7010   | Telenor B06        | https://uecapability.smartphonecombo.it/view/?id=e37d97a6-75fb-4722-b28e-e7c333cd11ac |
-| MC7010D  | Vodafone Italy B09 | https://uecapability.smartphonecombo.it/view/?id=075420aa-369c-426f-9b66-d098421a2e67 |
-| MC7010D  | WIND Italy B03     | https://uecapability.smartphonecombo.it/view/?id=0f9a07af-0a55-4a3a-81f2-4d0c65cfcb00 |
-| MC7010D  | H3G UK B09         | https://uecapability.smartphonecombo.it/view/?id=3f6fd35d-971a-4b79-be24-e8db5c0e5ebe |
-| MC7010CA | TELUS B01          | https://uecapability.smartphonecombo.it/view/?id=c17826c9-29da-4c81-9074-6fb078f122e9 |
-
-## NR5G
-| Device   | Firmware           | LTE CAP                                                                               |
-|----------|--------------------|---------------------------------------------------------------------------------------|
-| MC7010   | Elisa B17          | https://uecapability.smartphonecombo.it/view/?id=0ea6852b-1e16-4a60-83f5-189e3ee9b4cc |
-| MC7010   | DNA B12            | https://uecapability.smartphonecombo.it/view/?id=fc321d89-459b-4638-9240-fe1e829f6d45 |
-| MC7010   | H3G Austria B07    | https://uecapability.smartphonecombo.it/view/?id=9b705119-74ea-4055-b4fb-485846097e63 |
-| MC7010   | Telenor B06        | https://uecapability.smartphonecombo.it/view/?id=a3fff076-92ca-4b61-8b6c-9ac43ed8901f |
-| MC7010D  | Vodafone Italy B09 | https://uecapability.smartphonecombo.it/view/?id=e2ba5ea6-c543-4b6b-852f-9dd3036a1a20 |
-| MC7010D  | WIND Italy B03     | https://uecapability.smartphonecombo.it/view/?id=b0983dba-8622-4a81-a2b0-bd3adee04735 |
-| MC7010D  | H3G UK B09         | https://uecapability.smartphonecombo.it/view/?id=7441f517-ef84-437e-9c10-2341ff61b6fc |
-| MC7010CA | TELUS B01          | https://uecapability.smartphonecombo.it/view/?id=34732bf3-ed5f-4caf-908e-75e6f8af00bd |
 

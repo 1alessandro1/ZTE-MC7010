@@ -1,6 +1,6 @@
 # This is a repository with all informations about ZTE MC7010 (Outdoor 5G CPE) family
 
-The MC7010 CPE is and outdoor unit that has these technical specification:
+The MC7010 CPE is a 4G/5G outdoor unit with these specs:
 
 - Network support: SA/NSA 5G Sub-6G/mmWave + LTE Networks
 - Chipset: Qualcomm 5G SDX55M platform
@@ -13,7 +13,7 @@ The MC7010 CPE is and outdoor unit that has these technical specification:
     - Max Speed: download up to 3.8Gbps, upload up to 331Mbps
     - Bandwidth: Sub-6G@100Mhz, mmWave@800Mhz
     - Modulation: Sub-6G DL/UL 256QAM, mmWave DL/UL 64QAM
-- Dual Mode: Bridge or Router, there is no Wi-Fi
+- Dual Mode: Bridge or Router, there is no embedded Wi-Fi
 - Network connectivity: 2.5GbE interface with PoE 802.3af/at (bundled injector)
 - Other connectivity:
     - USB Type C with RNDIS Emulation. Can be used also for diagnostic and flash pourpose
@@ -26,5 +26,6 @@ The MC7010 CPE is and outdoor unit that has these technical specification:
 - [Partition & Filesystem Info](fs.md)
 - [LTE/NR5G CA Combos](cacombo.md)
 - [Play with EDL tools and partitions](edl.md)
+- [RAW DUMP with Windows](rawdump.md)
 
 Any help is really appreciated, feel free to open a PR to fix or add informations :-)

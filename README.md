@@ -18,7 +18,7 @@ The MC7010 CPE is a 4G/5G outdoor unit with these specs:
 - Other connectivity:
     - USB Type C with RNDIS Emulation. Can be used also for diagnostic and flash pourpose
     - BLE: Used with *"Installer Helper App"* ([Android](https://play.google.com/store/apps/details?id=com.zte.fwainstallwizard&hl=it&gl=US&pli=1)/[iOS](https://apps.apple.com/tr/app/install-helper/id1541447686)) to point the CPE when installed outside
-- Dock or Wall-Kit: based on the HW revs, you will have also a dock to install the unit inside
+- Dock or Wall-Kit: based on the hardware version, you will have also a dock to use the unit inside
 
 # Useful Stuff
 

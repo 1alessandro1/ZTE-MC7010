@@ -1,4 +1,4 @@
-# This is a little guide to put an MC7010 into EDL mode on Linux (sorry guys, I hate Windows :-))
+# Steps to put CPE in EDL Mode (on Linux) and play with partitions
 
 Before starting, be sure you have [Bjoern Kerler's EDL tools](https://github.com/bkerler/edl) and sg3-utils already installed on your machine.
 

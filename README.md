@@ -1,18 +1,28 @@
 # This is a repository with all informations about ZTE MC7010 (Outdoor 5G CPE) family
 
-# HW revisions (currently known)
-There are five different hardware revisions available on the market; some others may also be available, but I've never seen them on my own :)
+The MC7010 CPE is and outdoor unit that has these technical specification:
 
-- *MC7010 (***w/mmWave***)* --> these units are sold in various markets (like Italy, by *Fastweb/Linkem*). They support 5G mmWave and sub-6GHz, but they only support TDD LTE bands. They actually miss HW on the board, so there is no way to use them with FDD bands.
-- *MC7010 (***Plain Unit w/o mmWave***)* --> these units are sold in various markets by ISPs or directly by **ZTE**. The most commonly found are from ***Elisa, Telenor, DNA, Play, TIM Italy, 3 Austria***. Their firmware can be exchanged between them. Flashing firmware from **MC7010Ds** on plain **MC7010s** units is not possible, otherwise you will get **"NO SERVICE"**.
-- *MC7010 (***China Unit***)* --> these units are sold only in the Chinese market (but they're easily found on AliExpress). It is not currently known whether the firmware can be replaced with the firmware from other versions. Their firmware doens't work on plain **MC7010** units.
-- *MC7010CA* --> these units are sold in the Mexican or Canadian markets. The most commonly found are from ***Telus, Roger and Telcel***. No mmWave support, crossflashing firmware is not possible.
-- *MC7010D* --> these units are sold in various markets, only by ISPs. The most commonly found are from ***Vodafone Italy, WINDTRE Italy, Orange Poland, H3G UK, Yettel BG***. Their firmware can be exchanged between them. Flashing the firmware from plain **MC7010s** on **MC7010D** units is not possible, otherwise you will get **"NO SERVICE"**.
+- Network support: SA/NSA 5G Sub-6G/mmWave + LTE Networks
+- Chipset: Qualcomm 5G SDX55M platform
+- CPU: Cortex A7 up to 1.4GHz
+- RAM: 256MB
+- NAND: 512MB
+- LED: Power, Network, LAN, Signal RSSI (three leds)
+- 4G LTE Cat: 20
+- 5G Specs:
+    - Max Speed: download up to 3.8Gbps, upload up to 331Mbps
+    - Bandwidth: Sub-6G@100Mhz, mmWave@800Mhz
+    - Modulation: Sub-6G DL/UL 256QAM, mmWave DL/UL 64QAM
+- Dual Mode: Bridge or Router, there is no Wi-Fi
+- Network connectivity: 2.5GbE interface with PoE 802.3af/at (bundled injector)
+- Other connectivity:
+    - USB Type C with RNDIS Emulation. Can be used also for diagnostic and flash pourpose
+    - BLE: Used with *"Installer Helper App"* to point the CPE when installed outside
+- Dock or Wall-Kit: based on the HW revs, you will have also a dock to install the unit inside
 
-All other variants can be found on the **ZTE ECCN** site at [this link](https://www.zte.com.cn/global/about/eccn.html)
+# Useful Stuff
 
-Here is some useful stuff:
-
+- [Hardware Revision](hwrev.md)
 - [Partition & Filesystem Info](fs.md)
 - [LTE/NR5G CA Combos](cacombo.md)
 - [Play with EDL tools and partitions](edl.md)

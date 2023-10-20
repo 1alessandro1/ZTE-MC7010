@@ -1,8 +1,10 @@
 # This is a little guide to put an MC7010 into EDL mode on Linux (sorry guys, I hate Windows :-))
 
-Before mstarting, be sure you have [Bjoern Kerler's EDL tools](https://github.com/bkerler/edl) and sg3-utils already installed on your machine.
+Before starting, be sure you have [Bjoern Kerler's EDL tools](https://github.com/bkerler/edl) and sg3-utils already installed on your machine.
 
-All commands must be run as ***root*** to avoid any issues with permissions.
+Please use this [prog_firehose.mbn](/Loaders/prog_firehose.mbn) as loader to interact with the CPE.
+
+!!! All commands must be run as ***root*** to avoid any issues with permissions. !!!
 
 Connect the CPE to your PC using a USB-C cable, it's important to use the CPE's PoE adapter during all the procedure to avoid issues with boot. The following output (or similar) should be visible in `dmesg`:
 
@@ -24,21 +26,21 @@ Connect the CPE to your PC using a USB-C cable, it's important to use the CPE's 
 [3005704.155444] usb 1-1: Product: ZTE Mobile Broadband
 [3005704.155445] usb 1-1: Manufacturer: ZTE,Incorporated
 [3005704.155446] usb 1-1: SerialNumber: MF9930ZTED000000
-[3005704.160609] cdc_ether 1-1:1.0 usb0: register 'cdc_ether' at usb-0000:00:14.0-1, ZTE CDC Ethernet Device, 32:7a:05:47:e1:fd
+[3005704.160609] cdc_ether 1-1:1.0 usb0: register 'cdc_ether' at usb-0000:00:14.0-1, ZTE CDC Ethernet Device, XX:XX:XX:XX:XX:XX
 [3005704.161074] usb-storage 1-1:1.2: USB Mass Storage device detected
 [3005704.161327] scsi host9: usb-storage 1-1:1.2
 [3005705.189101] scsi 9:0:0:0: CD-ROM            ZTE      USB SCSI CD-ROM  2.31 PQ: 0 ANSI: 2
 [3005705.189573] sr 9:0:0:0: Power-on or device reset occurred
 [3005705.190636] sr 9:0:0:0: [sr1] scsi-1 drive
-[3005705.191124] sr 9:0:0:0: Attached scsi CD-ROM sr1
-[3005705.191239] sr 9:0:0:0: Attached scsi generic sg1 type 5
+[3005705.191124] sr 9:0:0:0: Attached scsi CD-ROM sr0
+[3005705.191239] sr 9:0:0:0: Attached scsi generic sg0 type 5
 ```
 
 Now the CPE has to be switched from *CDROM+RNDIS* to *3 TTY MODE (Diag, Modem, NMEA)*. Doing so is accomplished using this command:
 
-`sg_raw -n /dev/sg1 99 00 00 00 00 00`
+`sg_raw -n /dev/sg0 99 00 00 00 00 00`
 
-In the provided example ***sg1*** was used because no other CDROM is installed, just check the `dmesg` to see which ***sgX*** is created when the CPE is connected to your PC. After executing it, the CPE will switch to DIAG mode and create three ***ttyUSBx*** ports: check the `dmesg` again to see how they are numbered.
+In the provided example ***sg0*** was used because no other CDROM is installed, just check the `dmesg` to see which ***sgX*** is created when the CPE is connected to your PC. After executing it, the CPE will switch to DIAG mode and create three ***ttyUSBX*** ports: check the `dmesg` again to see how they are numbered.
 
 Here is an example of successful switch:
 

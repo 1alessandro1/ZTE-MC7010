@@ -16,7 +16,7 @@ The MC7010 CPE is a 4G/5G outdoor unit with these specs:
 - Dual Mode: Bridge or Router, there is no embedded Wi-Fi
 - Network connectivity: 2.5GbE interface with PoE 802.3af/at (bundled injector)
 - Other connectivity:
-    - USB Type C with RNDIS Emulation. Can be used also for diagnostic and flash pourpose
+    - USB Type C with RNDIS Emulation. Can be used also for diagnostic and flash purpose
     - BLE: Used with *"Installer Helper App"* ([Android](https://play.google.com/store/apps/details?id=com.zte.fwainstallwizard&hl=it&gl=US&pli=1)/[iOS](https://apps.apple.com/tr/app/install-helper/id1541447686)) to point the CPE when installed outside
 - Dock or Wall-Kit: based on the hardware version, you will have also a dock to use the unit inside
 
